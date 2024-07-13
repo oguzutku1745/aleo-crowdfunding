@@ -1,0 +1,14 @@
+{
+  "program": "crowdfunding_app.aleo",
+  "version": "0.0.0",
+  "description": "",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "name": "token.aleo",
+      "location": "local",
+      "network": null,
+      "path": "/Users/ouyildiz/Desktop/Aleo/token"
+    }
+  ]
+}

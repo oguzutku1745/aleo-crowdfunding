@@ -1,0 +1,6 @@
+[[package]]
+name = "token.aleo"
+location = "local"
+path = "/Users/ouyildiz/Desktop/Aleo/token"
+checksum = "376346fcff5c4418e7d9e6a84eb5060f99b13ff743223475ef5e5b051b9d0bc8"
+dependencies = []
