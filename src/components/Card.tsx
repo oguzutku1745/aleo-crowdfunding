@@ -15,7 +15,7 @@ interface CampaignProps {
         <p>targeted {target_amount} reached {current_amount}</p>
         <h3>{title}</h3>
         <div className="campaign-footer">
-          <a href="#full-view">full view</a>
+          <span className="full-view">Details</span>
           <span className="status">{status}</span>
         </div>
       </div>

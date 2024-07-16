@@ -1,4 +1,4 @@
-# crowdfunding_app.aleo
+# crowdfunding_program.aleo
 
 ## Build Guide
 

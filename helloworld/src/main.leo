@@ -1,7 +1,7 @@
-import token.aleo;
+import token_testtzu.aleo;
 
-// The 'helloworld' program.
-program crowdfunding_app.aleo {
+// The 'crowdfunding_program' program.
+program crowdfunding_program.aleo {
 
     struct CampaignInfo {
         title: u128,
@@ -15,7 +15,8 @@ program crowdfunding_app.aleo {
     // To use an external service like pastebin
     struct ContentInfo {
         data1: u128,
-        data2: u128
+        data2: u128,
+        data3: u128,
     }
 
     // Proposal record records proposal info publicly
@@ -47,7 +48,16 @@ program crowdfunding_app.aleo {
     /* 
     leo run start_campaign "{
     title: 2077160157502449938194577302446444u128,
-    content: {data1: 1u128, data2:2u128},
+    content: {data1: 154789537931448239028249580234194842728u128, data2:68066741453145497669585541961453153893u128, data3:3420217u128},
+    receiver: aleo1rhgdu77hgyqd3xjj8ucu3jj9r2krwz6mnzyd80gncr5fxcwlh5rsvzp9px,
+    target_amount: 100000000u64,
+    current_amount: 0u64,
+    campaign_status: true
+    }" 1u32
+
+    leo execute --program crowdfunding_program --private-key APrivateKey1zkp242TQdK6jWvkCYdJSAze8XQ6nYjbjMBFont5aHmJ2noJ --broadcast start_campaign "{
+    title: 2077160157502449938194577302446444u128,
+    content: {data1: 154789537931448239028249580234194842728u128, data2:68066741453145497669585541961453153893u128, data3:3420217u128},
     receiver: aleo1rhgdu77hgyqd3xjj8ucu3jj9r2krwz6mnzyd80gncr5fxcwlh5rsvzp9px,
     target_amount: 100000000u64,
     current_amount: 0u64,
@@ -82,9 +92,9 @@ program crowdfunding_app.aleo {
     */
 
     // Make a private donation
-    async transition donate_private(public id: field, receiver: address, token: token.aleo/token, amount: u64) -> (token.aleo/token,token.aleo/token, Future) {
+    async transition donate_private(public id: field, receiver: address, token: token_testtzu.aleo/token, amount: u64) -> (token_testtzu.aleo/token,token_testtzu.aleo/token, Future) {
 
-        let (input_record, output_record):(token.aleo/token, token.aleo/token) = token.aleo/transfer_private(token, receiver, amount);
+        let (input_record, output_record):(token_testtzu.aleo/token, token_testtzu.aleo/token) = token_testtzu.aleo/transfer_private(token, receiver, amount);
 
         return (input_record,output_record, finalize_donate_private(id,amount));
     }
@@ -116,7 +126,7 @@ program crowdfunding_app.aleo {
 
     async transition donate_public(public id:field, public receiver:address,  public amount:u64) -> Future {
 
-        let donate_future:Future = token.aleo/transfer_public(receiver, amount);
+        let donate_future:Future = token_testtzu.aleo/transfer_public(receiver, amount);
 
         return finalize_donate_public( id, donate_future, amount );
     }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/NewCampaignModal.css';
 
+
 interface NewCampaignModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
@@ -24,7 +25,7 @@ const NewCampaignModal: React.FC<NewCampaignModalProps> = ({ isOpen, onRequestCl
     onSubmit({ title, content, target_amount: targetAmount, receiver_address: receiverAddress });
     onRequestClose();
   };
-
+  
   if (!isOpen) {
     return null;
   }

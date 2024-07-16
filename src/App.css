@@ -122,6 +122,13 @@ body {
   color: #000;
 }
 
+.full-view {
+  padding: 5px 10px;
+  background-color: #69ff9e;
+  border-radius: 5px;
+  color: #000;
+}
+
 .footer {
   text-align: center;
   padding: 20px;

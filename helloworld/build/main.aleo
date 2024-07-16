@@ -1,10 +1,11 @@
-import token.aleo;
-program crowdfunding_app.aleo;
+import token_testtzu.aleo;
+program crowdfunding_program.aleo;
 
 
 struct ContentInfo:
     data1 as u128;
     data2 as u128;
+    data3 as u128;
 
 struct CampaignInfo:
     title as u128;
@@ -38,7 +39,7 @@ mapping campaign_details:
 function start_new_round:
     input r0 as u32.public;
     async start_new_round r0 into r1;
-    output r1 as crowdfunding_app.aleo/start_new_round.future;
+    output r1 as crowdfunding_program.aleo/start_new_round.future;
 
 finalize start_new_round:
     input r0 as u32.public;
@@ -54,7 +55,7 @@ function start_campaign:
     cast self.caller r2 r0 into r3 as Campaign.record;
     async start_campaign r2 r0 r1 into r4;
     output r3 as Campaign.record;
-    output r4 as crowdfunding_app.aleo/start_campaign.future;
+    output r4 as crowdfunding_program.aleo/start_campaign.future;
 
 finalize start_campaign:
     input r0 as field.public;
@@ -72,13 +73,13 @@ finalize start_campaign:
 function donate_private:
     input r0 as field.public;
     input r1 as address.private;
-    input r2 as token.aleo/token.record;
+    input r2 as token_testtzu.aleo/token.record;
     input r3 as u64.private;
-    call token.aleo/transfer_private r2 r1 r3 into r4 r5;
+    call token_testtzu.aleo/transfer_private r2 r1 r3 into r4 r5;
     async donate_private r0 r3 into r6;
-    output r4 as token.aleo/token.record;
-    output r5 as token.aleo/token.record;
-    output r6 as crowdfunding_app.aleo/donate_private.future;
+    output r4 as token_testtzu.aleo/token.record;
+    output r5 as token_testtzu.aleo/token.record;
+    output r6 as crowdfunding_program.aleo/donate_private.future;
 
 finalize donate_private:
     input r0 as field.public;
@@ -98,13 +99,13 @@ function donate_public:
     input r0 as field.public;
     input r1 as address.public;
     input r2 as u64.public;
-    call token.aleo/transfer_public r1 r2 into r3;
+    call token_testtzu.aleo/transfer_public r1 r2 into r3;
     async donate_public r0 r3 r2 into r4;
-    output r4 as crowdfunding_app.aleo/donate_public.future;
+    output r4 as crowdfunding_program.aleo/donate_public.future;
 
 finalize donate_public:
     input r0 as field.public;
-    input r1 as token.aleo/transfer_public.future;
+    input r1 as token_testtzu.aleo/transfer_public.future;
     input r2 as u64.public;
     await r1;
     get campaigns[r0] into r3;
@@ -123,7 +124,7 @@ function finish_campaign:
     input r1 as field.public;
     assert.eq r0.owner self.caller;
     async finish_campaign r1 into r2;
-    output r2 as crowdfunding_app.aleo/finish_campaign.future;
+    output r2 as crowdfunding_program.aleo/finish_campaign.future;
 
 finalize finish_campaign:
     input r0 as field.public;
