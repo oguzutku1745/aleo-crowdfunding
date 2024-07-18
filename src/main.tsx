@@ -13,26 +13,29 @@ import {
   AvailWalletAdapter,
   configureConnectionForPuzzle  
 } from 'aleo-adapters';
-import { WalletAdapterNetwork } from "@demox-labs/aleo-wallet-adapter-base";
+import { 
+  WalletAdapterNetwork,
+  DecryptPermission
+ } from "@demox-labs/aleo-wallet-adapter-base";
 import "@demox-labs/aleo-wallet-adapter-reactui/styles.css";
 
 const MainApp = () => {
   const wallets = useMemo(
     () => [
         new LeoWalletAdapter({
-            appName: 'Aleo app',
+            appName: 'Aleo Crowdfunding',
         }),
         new PuzzleWalletAdapter({
-            appName: 'Aleo app',
+            appName: 'Aleo Crowdfunding',
         }),
         new FoxWalletAdapter({
-            appName: 'Aleo app',
+            appName: 'Aleo Crowdfunding',
         }),
         new SoterWalletAdapter({
-            appName: 'Aleo app',
+            appName: 'Aleo Crowdfunding',
         }),
         new AvailWalletAdapter({
-            appName: 'Aleo app',
+            appName: 'Aleo Crowdfunding',
         })
     ],
     [],
@@ -40,8 +43,8 @@ const MainApp = () => {
 
   useEffect(() => {
     configureConnectionForPuzzle({
-        dAppName: 'Aleo Vote',
-        dAppDescription: 'Voting App Example',
+        dAppName: 'Aleo Crowdfunding',
+        dAppDescription: 'Crowdfunding Example',
         dAppUrl: `http://localhost:5173/`,
         dAppIconURL: ``
     });
@@ -50,6 +53,7 @@ const MainApp = () => {
   return (
     <WalletProvider 
       network={WalletAdapterNetwork.TestnetBeta}
+      decryptPermission={DecryptPermission.UponRequest}
       wallets={wallets} 
       autoConnect
     >

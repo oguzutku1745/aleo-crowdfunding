@@ -34,7 +34,12 @@ program crowdfunding_program.aleo {
 
     /* 
     leo run start_new_round 1u32
+
+    leo execute --program crowdfunding_program --private-key  --broadcast start_new_round 1u32
+
     */
+
+    
 
     async transition start_new_round(public round_number:u32) -> Future {
 
@@ -55,7 +60,7 @@ program crowdfunding_program.aleo {
     campaign_status: true
     }" 1u32
 
-    leo execute --program crowdfunding_program --private-key APrivateKey1zkp242TQdK6jWvkCYdJSAze8XQ6nYjbjMBFont5aHmJ2noJ --broadcast start_campaign "{
+    leo execute --program crowdfunding_program --private-key  --broadcast start_campaign "{
     title: 2077160157502449938194577302446444u128,
     content: {data1: 154789537931448239028249580234194842728u128, data2:68066741453145497669585541961453153893u128, data3:3420217u128},
     receiver: aleo1rhgdu77hgyqd3xjj8ucu3jj9r2krwz6mnzyd80gncr5fxcwlh5rsvzp9px,
@@ -89,6 +94,15 @@ program crowdfunding_program.aleo {
       amount: 100u64.private,
       _nonce: 5452747651817795150193526237055188647512741096858365454690909360040010618464group.public
     }" 50u64
+
+    leo execute --program token_testtzu --private-key  --broadcast mint_private aleo1pqcumqvf0vjqq800uuyaqqt6s2q6dxcgglywhf6dpzac2cmjgu8q2876eu 100000000000u64
+
+    leo execute --program crowdfunding_program --private-key  --broadcast donate_private 3313166834068393079756578439666536539162226555748526545042355726744556015433field aleo1rhgdu77hgyqd3xjj8ucu3jj9r2krwz6mnzyd80gncr5fxcwlh5rsvzp9px "{
+        owner: aleo1pqcumqvf0vjqq800uuyaqqt6s2q6dxcgglywhf6dpzac2cmjgu8q2876eu.private,
+        amount: 100000000000u64.private,
+        _nonce: 1335979800231228359281581801135524204633177467971142452729873192996459467505group.public
+    }" 50000u64
+
     */
 
     // Make a private donation

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../styles/NewCampaignModal.css';
-
+import { stringConverter } from 'leostringer';
 
 interface NewCampaignModalProps {
   isOpen: boolean;
@@ -9,8 +9,8 @@ interface NewCampaignModalProps {
 }
 
 interface Campaign {
-  title: string;
-  content: string;
+  formattedTitle: bigint[];
+  formattedContent: bigint[];
   target_amount: string;
   receiver_address: string;
 }
@@ -22,10 +22,14 @@ const NewCampaignModal: React.FC<NewCampaignModalProps> = ({ isOpen, onRequestCl
   const [receiverAddress, setReceiverAddress] = useState('');
 
   const handleSubmit = () => {
-    onSubmit({ title, content, target_amount: targetAmount, receiver_address: receiverAddress });
+    let formattedTitle = stringConverter(title);
+    let formattedContent = stringConverter(content);
+
+    onSubmit({ formattedTitle, formattedContent,receiver_address: receiverAddress, target_amount: targetAmount  });
     onRequestClose();
   };
-  
+
+
   if (!isOpen) {
     return null;
   }
@@ -37,11 +41,11 @@ const NewCampaignModal: React.FC<NewCampaignModalProps> = ({ isOpen, onRequestCl
         <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
           <label>
             Title:
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+            <input placeholder="Max 16 character" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
           </label>
           <label>
-            Content:
-            <textarea value={content} onChange={(e) => setContent(e.target.value)} />
+            Content link:
+            <textarea placeholder='pastebin raw link' value={content} onChange={(e) => setContent(e.target.value)} />
           </label>
           <label>
             Target Amount:

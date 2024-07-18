@@ -1,0 +1,56 @@
+/* Modal.css */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 500px;
+  width: 100%;
+  z-index: 1001;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.donation-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.donation-inputs {
+  margin-top: 10px;
+}
+
+.donation-inputs label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.donation-inputs input {
+  width: 100%;
+  padding: 5px;
+  margin-top: 5px;
+}

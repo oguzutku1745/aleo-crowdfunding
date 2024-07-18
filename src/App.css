@@ -127,6 +127,11 @@ body {
   background-color: #69ff9e;
   border-radius: 5px;
   color: #000;
+  cursor: pointer;
+}
+
+.full-view:hover {
+  color: rgb(0, 139, 23); 
 }
 
 .footer {

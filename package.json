@@ -12,23 +12,25 @@
     "install-leo": "./install.sh"
   },
   "dependencies": {
+    "@aleohq/sdk": "^0.6.2",
     "@demox-labs/aleo-wallet-adapter-react": "^0.0.21",
     "@demox-labs/aleo-wallet-adapter-reactui": "^0.0.34",
     "aleo-adapters": "^1.1.0",
-    "@aleohq/sdk": "^0.6.2",
     "comlink": "^4.4.1",
+    "leostringer": "^1.1.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-modal": "^3.16.1"
   },
   "devDependencies": {
     "@babel/core": "^7.17.2",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.22.15",
     "@babel/preset-typescript": "^7.23.2",
-    "@types/react": "^18.2.15",
-    "@types/react-dom": "^18.2.7",
     "@types/babel__generator": "^7.6.6",
     "@types/node": "^20.8.7",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.4",
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^11.0.0",
