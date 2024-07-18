@@ -12,11 +12,13 @@ import {
   WalletAdapterNetwork,
   WalletNotConnectedError,
 } from '@demox-labs/aleo-wallet-adapter-base';
+import EndCampaignModal from './components/EndCampaignModal';
 
 import { useFetchCampaignCount, useFetchCampaignDetails, useFetchCampaigns } from './hooks/useFetchCampaignData';
 
 const App: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpenEnd, setIsModalOpenEnd] = useState(false);
   const { publicKey, requestTransaction, transactionStatus } = useWallet();
   const [status, setStatus] = useState<string | undefined>();
   const [txId, setTxId] = useState("");
@@ -68,8 +70,16 @@ const App: React.FC = () => {
     setIsModalOpen(true);
   };
 
+  const handleOpenModalEnd = () => {
+    setIsModalOpenEnd(true);
+  };
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleCloseModalEnd = () => {
+    setIsModalOpenEnd(false);
   };
 
   const handleSubmit = async (campaign: { formattedTitle: bigint[], formattedContent: bigint[], target_amount: string, receiver_address: string }) => {
@@ -118,6 +128,7 @@ const App: React.FC = () => {
     }
   };
 
+
   const handleDonate = async (type: string, tokenRecord: string, amount: string, index: number, receiver: string) => {
     if (!publicKey) throw new WalletNotConnectedError();
     console.log('Donation submitted:', { type, tokenRecord, amount });
@@ -153,12 +164,48 @@ const App: React.FC = () => {
   };
 
 
+  const handleSubmitEnd = async (record:string, index:number) => {
+    if (!publicKey) throw new WalletNotConnectedError();
+
+    console.log(index);
+
+    const campaignId = campaignDetails[index];
+    console.log(campaignId);
+    const values = [JSON.parse(record), campaignId];
+    console.log(values)
+
+    console.log(publicKey)
+
+    const aleoTransaction = Transaction.createTransaction(
+      publicKey,
+      WalletAdapterNetwork.TestnetBeta,
+      "crowdfunding_program.aleo",
+      "finish_campaign",
+      values,
+      100000,
+      false
+    );
+
+    if (requestTransaction) {
+      const tx = await requestTransaction(aleoTransaction);
+      console.log(tx)
+      setTxId(tx);
+    }
+
+    if (transactionStatus) {
+      const status = await transactionStatus(txId);
+      console.log(status)
+      setStatus(status);
+    }
+  };
+
   return (
     <div className="container">
       <MenuBar />
       <main>
         <div className="main-header">
           <h2>Campaigns : {campaignCount !== null ? campaignCount : 'Loading...'}</h2>
+          <button className="end-campaign-btn" onClick={handleOpenModalEnd}>End Campaign</button>
           <button className="new-campaign-btn" onClick={handleOpenModal}>New Campaign</button>
         </div>
         <div className="campaigns">
@@ -185,6 +232,7 @@ const App: React.FC = () => {
         <p>Aleo Crowdfunding App. Built with ❤️</p>
       </footer>
       <NewCampaignModal isOpen={isModalOpen} onRequestClose={handleCloseModal} onSubmit={handleSubmit} />
+      <EndCampaignModal campaigns={campaigns} isOpen={isModalOpenEnd} onRequestClose={handleCloseModalEnd} onSubmit={handleSubmitEnd} />
     </div>
   );
 };

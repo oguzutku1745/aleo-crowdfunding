@@ -53,7 +53,7 @@ body {
 
 .main-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   padding: 20px;
 }
@@ -61,6 +61,15 @@ body {
 .new-campaign-btn {
   padding: 10px 20px;
   background-color: #28a745;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.end-campaign-btn {
+  padding: 10px 20px;
+  background-color: #91032b;
   border: none;
   border-radius: 5px;
   color: #fff;
