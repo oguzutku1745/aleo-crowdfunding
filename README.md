@@ -1,17 +1,5 @@
 # React + Aleo + Leo
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/fork/github/AleoHQ/sdk/tree/testnet3/create-aleo-app/template-react)
-
-This template provides a minimal setup to get React and Aleo working in Vite
-with HMR and some ESLint rules.
-
-This template includes a Leo program that is loaded by the web app located in
-the `helloworld` directory.
-
-Note: Webpack is currently used for production builds due to a
-[bug](https://github.com/vitejs/vite/issues/13367) with Vite related to nested
-workers.
-
 ### Start in development mode
 
 ```bash
@@ -19,6 +7,13 @@ npm run dev
 ```
 
 Your app should be running on http://localhost:5173/
+
+### Mocks and Errors
+
+1. The round_id value is fixed to 1u32 for test purposes.
+
+2. Currently, requests to the Pastebin service result in CORS errors. Using a proxy service to bypass this results in blocking the remaining requests except for the first one. So, only one of the contents is able to be fetched. Due to these problems with Pastebin, it can be easily fixed by changing the text provider service.
+
 
 ### Build Leo program
 
@@ -40,52 +35,4 @@ Your app should be running on http://localhost:5173/
 
 ## Deploy program from web app
 
-> [!WARNING]  
-> This is for demonstration purposes or local testing only, in production applications you
-> should avoid building a public facing web app with private key information
-
-Information on generating a private key, seeding a wallet with funds, and finding a spendable record can be found here
-if you are unfamiliar: https://developer.aleo.org/testnet/getting_started/deploy_execute_demo
-
-Aleo programs deployed require unique names, make sure to edit the program's name to something unique in `helloworld/src/main.leo`, `helloworld/program.json`, rename `helloworld/inputs/helloworld.in` and rebuild.
-
-1. In the `worker.js` file modify the privateKey to be an account with available
-   funds
-
-   ```js
-   // Use existing account with funds
-   const account = new Account({
-     privateKey: "user1PrivateKey",
-   });
-   ```
-
-2. (Optional) Provide a fee record manually (located in commented code within `worker.js`)
-
-   If you do not provide a manual fee record, the SDK will attempt to scan for a record starting at the latest block. A simple way to speed this up would be to make a public transaction to this account right before deploying.
-   
-3. Run the web app and hit the deploy button
-
-## Production deployment
-
-### Build
-
-`npm run build`
-
-Upload `dist` folder to your host of choice.
-
-### ⚠️ Header warnings
-
-`DOMException: Failed to execute 'postMessage' on 'Worker': SharedArrayBuffer transfer requires self.crossOriginIsolated`
-
-If you get a warning similar to this when deploying your application, you need
-to make sure your web server is configured with the following headers:
-
-```
-Cross-Origin-Opener-Policy: same-origin
-Cross-Origin-Embedder-Policy: require-corp
-```
-
-We've included a `_headers` file that works with some web hosts (e.g. Netlify)
-but depending on your host / server setup you may need to configure the headers
-manually.
 # aleo-crowdfunding
