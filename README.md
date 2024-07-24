@@ -1,4 +1,5 @@
 # React + Aleo + Leo
+# aleo-crowdfunding
 
 ### Start in development mode
 
@@ -33,6 +34,4 @@ Your app should be running on http://localhost:5173/
 4. You can edit `helloworld/src/main.leo` and run `leo run` to compile and update the
    Aleo instructions under `build` which are loaded by the web app.
 
-## Deploy program from web app
-
-# aleo-crowdfunding
+## The test scripts are available on helloworld/run.sh
